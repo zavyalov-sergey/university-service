@@ -5,7 +5,6 @@ import com.zavyalov.universityservice.entity.Group;
 import com.zavyalov.universityservice.mapper.GroupListMapper;
 import com.zavyalov.universityservice.mapper.GroupMapper;
 import com.zavyalov.universityservice.repository.GroupRepository;
-import org.hibernate.query.Page;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,17 +31,17 @@ class GroupServiceTest {
     @Mock
     private GroupListMapper groupListMapper;
 
-    private GroupDto groupDto;
     private Group group;
+    private GroupDto groupDto;
     private List<Group> groups;
     private List<GroupDto> groupDtos;
 
     @BeforeEach
     void setUp() {
-        groupDto = new GroupDto("14941");
-
         group = new Group();
         group.setNumber(groupDto.number());
+
+        groupDto = new GroupDto("14941");
 
         groups = List.of(group);
         groupDtos = List.of(groupDto);
@@ -51,10 +50,10 @@ class GroupServiceTest {
     @Test
     void createGroup() {
         when(groupMapper.toGroup(groupDto)).thenReturn(group);
-        when(groupMapper.toGroupDto(any(Group.class))).thenReturn(groupDto);
+        when(groupMapper.toDto(any(Group.class))).thenReturn(groupDto);
         when(groupRepository.save(group)).thenReturn(group);
 
-        GroupDto actual = groupService.createGroup(groupDto);
+        var actual = groupService.createGroup(groupDto);
 
         assertEquals(groupDto, actual);
     }
@@ -63,9 +62,9 @@ class GroupServiceTest {
     void getAllGroups() {
         when(groupRepository.findAll()).thenReturn(groups);
 
-        when(groupListMapper.toGroupDtoList(groups)).thenReturn(groupDtos);
+        when(groupListMapper.toDtoList(groups)).thenReturn(groupDtos);
 
-        List<GroupDto> actual = groupService.getAllGroups();
+        var actual = groupService.getAllGroups();
 
         assertEquals(groupDtos, actual);
     }

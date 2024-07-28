@@ -1,4 +1,10 @@
 package com.zavyalov.universityservice.dto;
 
-public record StudentDto() {
+import java.util.Date;
+
+public record StudentDto(
+        String name,
+        Date acceptanceDate,
+        String group
+) {
 }

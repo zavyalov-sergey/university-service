@@ -4,12 +4,14 @@ import com.zavyalov.universityservice.dto.GroupDto;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/group")
 public class GroupController {
 
     @GetMapping
-    public Page<GroupDto> getGroups() {
+    public List<GroupDto> getGroups() {
 
         return null;
     }

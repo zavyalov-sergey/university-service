@@ -1,4 +1,6 @@
 package com.zavyalov.universityservice.dto;
 
-public record GroupDto() {
+public record GroupDto(
+        String number
+) {
 }

@@ -59,12 +59,12 @@ class GroupServiceTest {
     }
 
     @Test
-    void getAllGroups() {
+    void getGroups() {
         when(groupRepository.findAll()).thenReturn(groups);
 
         when(groupListMapper.toDtoList(groups)).thenReturn(groupDtos);
 
-        var actual = groupService.getAllGroups();
+        var actual = groupService.getGroups();
 
         assertEquals(groupDtos, actual);
     }

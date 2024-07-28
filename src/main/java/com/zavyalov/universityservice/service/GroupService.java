@@ -26,7 +26,7 @@ public class GroupService {
         return groupMapper.toDto(groupRepository.save(group));
     }
 
-    public List<GroupDto> getAllGroups() {
+    public List<GroupDto> getGroups() {
         var groups = groupRepository.findAll();
 
         return groupListMapper.toDtoList(groups);

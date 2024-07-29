@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: UniversityService
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/university_db?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=GMT
+    username: bestuser
+    password: bestuser
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+

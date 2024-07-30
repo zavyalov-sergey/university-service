@@ -4,9 +4,8 @@ import com.zavyalov.universityservice.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.UUID;
 
-public interface StudentRepository extends JpaRepository<Student, UUID> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    List<Student> findByUniGroup_Id(UUID uniGroupId);
+    List<Student> findByUniGroup_Id(Long uniGroupId);
 }

@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +20,7 @@ public class StudentController {
             @RequestParam("groupId") String groupId) {
         return ResponseEntity
                 .ok()
-                .body(studentService.findAllByGroupId(UUID.fromString(groupId)));
+                .body(studentService.findAllByGroupId(Long.parseLong(groupId)));
     }
 
     @PostMapping
@@ -37,6 +36,6 @@ public class StudentController {
             @RequestParam String id) {
         return ResponseEntity
                 .ok()
-                .body(studentService.delete(UUID.fromString(id)));
+                .body(studentService.delete(Long.parseLong(id)));
     }
 }

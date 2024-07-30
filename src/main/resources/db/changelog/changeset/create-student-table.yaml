@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create student v1
+      id: create student v2
       author: Sergey Zavyalov
       changes:
         - createTable:
@@ -8,7 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: uuid
+                  type: bigint
                   constraints:
                     primaryKey: true
               - column:
@@ -23,7 +23,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: uni_group_id
-                  type: uuid
+                  type: bigint
                   constraints:
                     foreignKeyName: uni_group_id
                     references: uni_group(id)

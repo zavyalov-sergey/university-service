@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +21,7 @@ public class StudentService {
 
     private static final String DELETE_MESSAGE = "Student deleted";
 
-    public List<StudentDto> findAllByGroupId(UUID id) {
+    public List<StudentDto> findAllByGroupId(Long id) {
         var students = studentRepository.findByUniGroup_Id(id);
 
         return studentListMapper.toDtoList(students);
@@ -36,7 +35,7 @@ public class StudentService {
     }
 
     @Transactional
-    public String delete(UUID id) {
+    public String delete(Long id) {
         studentRepository.deleteById(id);
         return DELETE_MESSAGE;
     }

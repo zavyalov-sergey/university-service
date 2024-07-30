@@ -1,8 +1,8 @@
 package com.zavyalov.universityservice.service;
 
 import com.zavyalov.universityservice.dto.StudentDto;
-import com.zavyalov.universityservice.entity.UniGroup;
 import com.zavyalov.universityservice.entity.Student;
+import com.zavyalov.universityservice.entity.UniGroup;
 import com.zavyalov.universityservice.mapper.StudentListMapper;
 import com.zavyalov.universityservice.mapper.StudentMapper;
 import com.zavyalov.universityservice.repository.StudentRepository;
@@ -13,9 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -44,7 +43,7 @@ class StudentServiceTest {
     void setUp() {
         UniGroup uniGroup = new UniGroup();
         uniGroup.setNumber("14941");
-        Date date = new Date(2024, 07, 28);
+        LocalDateTime date = LocalDateTime.of(2024, 07, 30, 0, 0, 0);
 
         student = new Student();
         student.setAcceptanceDate(date);
@@ -82,7 +81,7 @@ class StudentServiceTest {
     void delete() {
         doNothing().when(studentRepository).deleteById(any());
 
-        var actual = studentService.delete(UUID.randomUUID());
+        var actual = studentService.delete(1l);
 
         assertEquals("Student deleted", actual);
     }

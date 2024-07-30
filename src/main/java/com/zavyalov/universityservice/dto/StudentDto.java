@@ -1,10 +1,10 @@
 package com.zavyalov.universityservice.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public record StudentDto(
         String name,
-        Date acceptanceDate,
+        LocalDateTime acceptanceDate,
         String uniGroup
 ) {
 }

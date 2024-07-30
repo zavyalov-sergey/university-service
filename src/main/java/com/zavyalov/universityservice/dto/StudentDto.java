@@ -5,6 +5,6 @@ import java.util.Date;
 public record StudentDto(
         String name,
         Date acceptanceDate,
-        String group
+        String uniGroup
 ) {
 }

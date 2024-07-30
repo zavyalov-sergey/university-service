@@ -23,7 +23,7 @@ public class StudentService {
     private static final String DELETE_MESSAGE = "Student deleted";
 
     public List<StudentDto> findAllByGroupId(UUID id) {
-        var students = studentRepository.findByGroup_Id(id);
+        var students = studentRepository.findByUniGroup_Id(id);
 
         return studentListMapper.toDtoList(students);
     }

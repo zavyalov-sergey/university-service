@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-uni-group v1
+      author: Sergey Zavyalov
+      changes:
+        - createTable:
+            tableName: uni_group
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: number
+                  type: varchar(200)
+                  constraints:
+                    nullable: false

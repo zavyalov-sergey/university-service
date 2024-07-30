@@ -8,5 +8,5 @@ import java.util.UUID;
 
 public interface StudentRepository extends JpaRepository<Student, UUID> {
 
-    public List<Student> findByGroup_Id(UUID id);
+    List<Student> findByUniGroup_Id(UUID uniGroupId);
 }

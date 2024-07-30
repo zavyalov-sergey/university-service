@@ -13,7 +13,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class GroupControllerTest {
+class UniGroupControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

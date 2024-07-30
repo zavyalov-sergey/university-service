@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: create student v1
+      author: Sergey Zavyalov
+      changes:
+        - createTable:
+            tableName: student
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                 name: name
+                 type: varchar(40)
+                 constraints:
+                   nullable: false
+              - column:
+                  name: acceptance_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: uni_group_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: uni_group_id
+                    references: uni_group(id)

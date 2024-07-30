@@ -7,10 +7,10 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name = "group")
+@Table(name = "uni_group")
 @Setter
 @Getter
-public class Group {
+public class UniGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

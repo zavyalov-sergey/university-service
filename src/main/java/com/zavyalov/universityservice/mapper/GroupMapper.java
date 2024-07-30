@@ -1,13 +1,13 @@
 package com.zavyalov.universityservice.mapper;
 
 import com.zavyalov.universityservice.dto.GroupDto;
-import com.zavyalov.universityservice.entity.Group;
+import com.zavyalov.universityservice.entity.UniGroup;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface GroupMapper {
 
-    GroupDto toDto(Group group);
+    GroupDto toDto(UniGroup uniGroup);
 
-    Group toGroup(GroupDto groupDto);
+    UniGroup toGroup(GroupDto groupDto);
 }

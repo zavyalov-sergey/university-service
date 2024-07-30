@@ -33,7 +33,8 @@ public class StudentController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> delete(String id) {
+    public ResponseEntity<String> delete(
+            @RequestParam String id) {
         return ResponseEntity
                 .ok()
                 .body(studentService.delete(UUID.fromString(id)));

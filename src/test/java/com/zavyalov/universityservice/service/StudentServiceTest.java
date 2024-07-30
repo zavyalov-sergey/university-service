@@ -1,7 +1,7 @@
 package com.zavyalov.universityservice.service;
 
 import com.zavyalov.universityservice.dto.StudentDto;
-import com.zavyalov.universityservice.entity.Group;
+import com.zavyalov.universityservice.entity.UniGroup;
 import com.zavyalov.universityservice.entity.Student;
 import com.zavyalov.universityservice.mapper.StudentListMapper;
 import com.zavyalov.universityservice.mapper.StudentMapper;
@@ -42,14 +42,14 @@ class StudentServiceTest {
 
     @BeforeEach
     void setUp() {
-        Group group = new Group();
-        group.setNumber("14941");
+        UniGroup uniGroup = new UniGroup();
+        uniGroup.setNumber("14941");
         Date date = new Date(2024, 07, 28);
 
         student = new Student();
         student.setAcceptanceDate(date);
         student.setName("Molly");
-        student.setGroup(group);
+        student.setUniGroup(uniGroup);
 
         studentDto = new StudentDto("Molly", date, "14941");
 
@@ -59,7 +59,7 @@ class StudentServiceTest {
 
     @Test
     void findAllByGroupId() {
-        when(studentRepository.findByGroup_Id(any())).thenReturn(students);
+        when(studentRepository.findByUniGroup_Id(any())).thenReturn(students);
         when(studentListMapper.toDtoList(students)).thenReturn(studentDtos);
 
         var actual = studentService.findAllByGroupId(any());

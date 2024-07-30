@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "students")
+@Table(name = "student")
 @Getter
 @Setter
 public class Student {
@@ -25,5 +25,5 @@ public class Student {
     private Date acceptanceDate;
 
     @ManyToOne
-    private Group group;
+    private UniGroup uniGroup;
 }

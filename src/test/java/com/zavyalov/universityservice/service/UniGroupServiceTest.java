@@ -1,7 +1,7 @@
 package com.zavyalov.universityservice.service;
 
 import com.zavyalov.universityservice.dto.GroupDto;
-import com.zavyalov.universityservice.entity.Group;
+import com.zavyalov.universityservice.entity.UniGroup;
 import com.zavyalov.universityservice.mapper.GroupListMapper;
 import com.zavyalov.universityservice.mapper.GroupMapper;
 import com.zavyalov.universityservice.repository.GroupRepository;
@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class GroupServiceTest {
+class UniGroupServiceTest {
 
     @InjectMocks
     private GroupService groupService;
@@ -31,27 +31,27 @@ class GroupServiceTest {
     @Mock
     private GroupListMapper groupListMapper;
 
-    private Group group;
+    private UniGroup uniGroup;
     private GroupDto groupDto;
-    private List<Group> groups;
+    private List<UniGroup> uniGroups;
     private List<GroupDto> groupDtos;
 
     @BeforeEach
     void setUp() {
-        group = new Group();
-        group.setNumber(groupDto.number());
+        uniGroup = new UniGroup();
+        uniGroup.setNumber(groupDto.number());
 
         groupDto = new GroupDto("14941");
 
-        groups = List.of(group);
+        uniGroups = List.of(uniGroup);
         groupDtos = List.of(groupDto);
     }
 
     @Test
     void createGroup() {
-        when(groupMapper.toGroup(groupDto)).thenReturn(group);
-        when(groupMapper.toDto(any(Group.class))).thenReturn(groupDto);
-        when(groupRepository.save(group)).thenReturn(group);
+        when(groupMapper.toGroup(groupDto)).thenReturn(uniGroup);
+        when(groupMapper.toDto(any(UniGroup.class))).thenReturn(groupDto);
+        when(groupRepository.save(uniGroup)).thenReturn(uniGroup);
 
         var actual = groupService.createGroup(groupDto);
 
@@ -60,9 +60,9 @@ class GroupServiceTest {
 
     @Test
     void getGroups() {
-        when(groupRepository.findAll()).thenReturn(groups);
+        when(groupRepository.findAll()).thenReturn(uniGroups);
 
-        when(groupListMapper.toDtoList(groups)).thenReturn(groupDtos);
+        when(groupListMapper.toDtoList(uniGroups)).thenReturn(groupDtos);
 
         var actual = groupService.getGroups();
 

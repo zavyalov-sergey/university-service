@@ -1,6 +1,7 @@
 package com.zavyalov.universityservice.controller;
 
 import com.zavyalov.universityservice.dto.GroupDto;
+import com.zavyalov.universityservice.dto.UniGroupRequestDto;
 import com.zavyalov.universityservice.service.GroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,9 @@ public class GroupController {
 
     @PostMapping
     public ResponseEntity<GroupDto> createGroup(
-            @RequestBody GroupDto groupDto) {
+            @RequestBody UniGroupRequestDto dto) {
         return ResponseEntity
                 .ok()
-                .body(groupService.createGroup(groupDto));
+                .body(groupService.createGroup(dto.number()));
     }
 }

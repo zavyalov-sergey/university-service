@@ -1,6 +1,13 @@
 package com.zavyalov.universityservice.dto;
 
 public record GroupDto(
-        String number
+        String id,
+        String number,
+        Integer studentsCount
 ) {
+
+    @Override
+    public Integer studentsCount() {
+        return studentsCount != null ? studentsCount : 0;
+    }
 }

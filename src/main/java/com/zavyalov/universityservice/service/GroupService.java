@@ -1,7 +1,7 @@
 package com.zavyalov.universityservice.service;
 
 import com.zavyalov.universityservice.dto.GroupDto;
-import com.zavyalov.universityservice.mapper.GroupListMapper;
+import com.zavyalov.universityservice.entity.UniGroup;
 import com.zavyalov.universityservice.mapper.GroupMapper;
 import com.zavyalov.universityservice.repository.GroupRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,18 +18,30 @@ public class GroupService {
 
     private final GroupRepository groupRepository;
     private final GroupMapper groupMapper;
-    private final GroupListMapper groupListMapper;
-
-    @Transactional
-    public GroupDto createGroup(GroupDto groupDto) {
-        var group = groupMapper.toGroup(groupDto);
-
-        return groupMapper.toDto(groupRepository.save(group));
-    }
 
     public List<GroupDto> getGroups() {
-        var groups = groupRepository.findAll();
+        return groupRepository.getUniGroups()
+                .stream()
+                .map(group -> new GroupDto(
+                        (String) group[0],
+                        (String) group[1],
+                        (Integer) group[2]
+                ))
+                .collect(Collectors.toList());
+    }
 
-        return groupListMapper.toDtoList(groups);
+    @Transactional
+    public GroupDto createGroup(String number) {
+        var group = new UniGroup();
+
+        System.out.println(number);
+        group.setNumber(number);
+
+        var savedGroup = groupRepository.save(group);
+
+        System.out.println(
+                savedGroup
+        );
+        return groupMapper.toDto(savedGroup);
     }
 }

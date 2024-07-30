@@ -8,6 +8,4 @@ import org.mapstruct.Mapper;
 public interface GroupMapper {
 
     GroupDto toDto(UniGroup uniGroup);
-
-    UniGroup toGroup(GroupDto groupDto);
 }

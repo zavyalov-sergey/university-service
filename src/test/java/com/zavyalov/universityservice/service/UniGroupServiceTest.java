@@ -2,7 +2,6 @@ package com.zavyalov.universityservice.service;
 
 import com.zavyalov.universityservice.dto.GroupDto;
 import com.zavyalov.universityservice.entity.UniGroup;
-import com.zavyalov.universityservice.mapper.GroupListMapper;
 import com.zavyalov.universityservice.mapper.GroupMapper;
 import com.zavyalov.universityservice.repository.GroupRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,12 +28,9 @@ class UniGroupServiceTest {
     @Mock
     private GroupMapper groupMapper;
     @Mock
-    private GroupListMapper groupListMapper;
 
     private UniGroup group;
     private GroupDto groupDto;
-    private List<Object> uniGroups;
-    private List<GroupDto> groupDtos;
 
     @BeforeEach
     void setUp() {

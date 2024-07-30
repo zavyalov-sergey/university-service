@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    List<Student> findByUniGroup_Id(Long uniGroupId);
+    List<Student> findByUniGroup_IdOrderByAcceptanceDateDesc(Long uniGroupId);
 }

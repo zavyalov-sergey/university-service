@@ -5,6 +5,7 @@ import com.zavyalov.universityservice.entity.Student;
 import com.zavyalov.universityservice.entity.UniGroup;
 import com.zavyalov.universityservice.mapper.StudentListMapper;
 import com.zavyalov.universityservice.mapper.StudentMapper;
+import com.zavyalov.universityservice.repository.GroupRepository;
 import com.zavyalov.universityservice.repository.StudentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,10 +16,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,6 +28,8 @@ class StudentServiceTest {
     @InjectMocks
     private StudentService studentService;
 
+    @Mock
+    private GroupRepository groupRepository;
     @Mock
     private StudentRepository studentRepository;
     @Mock
@@ -58,7 +61,7 @@ class StudentServiceTest {
 
     @Test
     void findAllByGroupId() {
-        when(studentRepository.findByUniGroup_Id(any())).thenReturn(students);
+        when(studentRepository.findByUniGroup_IdOrderByAcceptanceDateDesc(any())).thenReturn(students);
         when(studentListMapper.toDtoList(students)).thenReturn(studentDtos);
 
         var actual = studentService.findAllByGroupId(any());
@@ -68,15 +71,23 @@ class StudentServiceTest {
 
     @Test
     void create() {
+        when(studentMapper.toStudent(studentDto)).thenReturn(student);
+        when(groupRepository.findById(any(Long.class))).thenReturn(Optional.of(student.getUniGroup()));
+        when(studentRepository.save(student)).thenReturn(student);
+        when(studentMapper.toDto(student)).thenReturn(studentDto);
 
+        var actual = studentService.create(studentDto);
+
+        assertEquals(studentDto, actual);
     }
 
     @Test
     void delete() {
-        doNothing().when(studentRepository).deleteById(any());
+        Long studentId = 1L;
+        when(studentRepository.findById(studentId)).thenReturn(Optional.of(student));
 
-        var actual = studentService.delete(1L);
+        String actualMessage = studentService.delete(studentId);
 
-        assertEquals("Student deleted", actual);
+        assertEquals("Student deleted", actualMessage);
     }
 }

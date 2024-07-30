@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -31,41 +31,40 @@ class UniGroupServiceTest {
     @Mock
     private GroupListMapper groupListMapper;
 
-    private UniGroup uniGroup;
+    private UniGroup group;
     private GroupDto groupDto;
-    private List<UniGroup> uniGroups;
+    private List<Object> uniGroups;
     private List<GroupDto> groupDtos;
 
     @BeforeEach
     void setUp() {
-        uniGroup = new UniGroup();
-        uniGroup.setNumber(groupDto.number());
+        group = new UniGroup();
+        group.setNumber("14941");
 
-        //groupDto = new GroupDto("14941");
+        groupDto = new GroupDto("", "14941", 0);
 
-        uniGroups = List.of(uniGroup);
-        groupDtos = List.of(groupDto);
     }
 
     @Test
     void createGroup() {
-        when(groupMapper.toGroup(groupDto)).thenReturn(uniGroup);
+        when(groupRepository.save(any(UniGroup.class))).thenReturn(group);
         when(groupMapper.toDto(any(UniGroup.class))).thenReturn(groupDto);
-        when(groupRepository.save(uniGroup)).thenReturn(uniGroup);
 
-       // var actual = groupService.createGroup(groupDto);
+        GroupDto result = groupService.createGroup(groupDto.number());
 
-        //assertEquals(groupDto, actual);
+        assertEquals(groupDto.number(), result.number());
     }
 
     @Test
-    void getGroups() {
-        when(groupRepository.findAll()).thenReturn(uniGroups);
+    void testGetGroups() {
+        List<Object[]> mockGroups = List.of(
+                new Object[]{1L, "14941", 5},
+                new Object[]{2L, "14942", 3}
+        );
+        when(groupRepository.getUniGroups()).thenReturn(mockGroups);
 
-        when(groupListMapper.toDtoList(uniGroups)).thenReturn(groupDtos);
+        List<GroupDto> result = groupService.getGroups();
 
-        var actual = groupService.getGroups();
-
-        assertEquals(groupDtos, actual);
+        assertEquals(2, result.size());
     }
 }

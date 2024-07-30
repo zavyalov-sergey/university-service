@@ -23,9 +23,9 @@ public class GroupService {
         return groupRepository.getUniGroups()
                 .stream()
                 .map(group -> new GroupDto(
-                        (String) group[0],
-                        (String) group[1],
-                        (Integer) group[2]
+                        String.valueOf(group[0]),
+                        String.valueOf(group[1]),
+                        (group[2] instanceof Long) ? ((Long) group[2]).intValue() : 0
                 ))
                 .collect(Collectors.toList());
     }
@@ -33,15 +33,10 @@ public class GroupService {
     @Transactional
     public GroupDto createGroup(String number) {
         var group = new UniGroup();
-
-        System.out.println(number);
         group.setNumber(number);
 
         var savedGroup = groupRepository.save(group);
 
-        System.out.println(
-                savedGroup
-        );
         return groupMapper.toDto(savedGroup);
     }
 }

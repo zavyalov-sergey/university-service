@@ -15,6 +15,7 @@ public class GroupController {
 
     private final GroupService groupService;
 
+    //без кол ва студентов
     @GetMapping
     public ResponseEntity<List<GroupDto>> getGroups() {
         return ResponseEntity

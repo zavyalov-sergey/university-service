@@ -43,7 +43,7 @@ class StudentServiceTest {
     void setUp() {
         UniGroup uniGroup = new UniGroup();
         uniGroup.setNumber("14941");
-        LocalDateTime date = LocalDateTime.of(2024, 07, 30, 0, 0, 0);
+        LocalDateTime date = LocalDateTime.of(2024, 7, 30, 0, 0, 0);
 
         student = new Student();
         student.setAcceptanceDate(date);
@@ -81,7 +81,7 @@ class StudentServiceTest {
     void delete() {
         doNothing().when(studentRepository).deleteById(any());
 
-        var actual = studentService.delete(1l);
+        var actual = studentService.delete(1L);
 
         assertEquals("Student deleted", actual);
     }

@@ -27,3 +27,8 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: uni_group_id
                     references: uni_group(id)
+
+        - addAutoIncrement:
+            tableName: student
+            columnDataType: bigint
+            columnName: id

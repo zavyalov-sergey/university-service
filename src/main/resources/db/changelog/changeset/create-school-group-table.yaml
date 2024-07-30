@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-uni-group v1
+      id: create-uni-group v3
       author: Sergey Zavyalov
       changes:
         - createTable:
@@ -16,3 +16,8 @@ databaseChangeLog:
                   type: varchar(200)
                   constraints:
                     nullable: false
+
+        - addAutoIncrement:
+            tableName: uni_group
+            columnDataType: bigint
+            columnName: id

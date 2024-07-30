@@ -1,9 +1,12 @@
 package com.zavyalov.universityservice.service;
 
 import com.zavyalov.universityservice.dto.StudentDto;
+import com.zavyalov.universityservice.entity.UniGroup;
 import com.zavyalov.universityservice.mapper.StudentListMapper;
 import com.zavyalov.universityservice.mapper.StudentMapper;
+import com.zavyalov.universityservice.repository.GroupRepository;
 import com.zavyalov.universityservice.repository.StudentRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +18,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class StudentService {
 
+    private final GroupRepository groupRepository;
     private final StudentRepository studentRepository;
     private final StudentListMapper studentListMapper;
     private final StudentMapper studentMapper;
@@ -31,12 +35,20 @@ public class StudentService {
     public StudentDto create(StudentDto studentDto) {
         var student = studentMapper.toStudent(studentDto);
 
-        return studentMapper.toDto(studentRepository.save(student));
+        UniGroup uniGroup = groupRepository.findById(Long.parseLong(studentDto.uniGroup()))
+                .orElseThrow(EntityNotFoundException::new);
+
+        student.setUniGroup(uniGroup);
+
+        var savedStudent = studentRepository.save(student);
+
+        return studentMapper.toDto(savedStudent);
     }
 
     @Transactional
     public String delete(Long id) {
-        studentRepository.deleteById(id);
+        studentRepository.findById(id)
+                .ifPresent(studentRepository::delete);
         return DELETE_MESSAGE;
     }
 }
